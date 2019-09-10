@@ -10,7 +10,7 @@ Rails dispose d'un outil de gestion des envois d'e-mail plutôt bien conçu : Ac
 ## $ rails g mailer UserMailer
 ==> crée un ficher user_mailer.rb dans app/mailers == definition du mail à envoyer
 
-==> crée un dossier user_mailer dans aap/views == visuel dans mail en html et text
+==> crée un dossier user_mailer dans app/views == visuel dans mail en html et text
 
 ## Définir à quel moment notre app Rails doit effectuer l'envoi
 ==> Model, Controller == méthode + callback de ces méthodes
@@ -182,7 +182,7 @@ Toutefois, pour des raisons de fiabilité d’envoi depuis des adresses gratuite
 
 ### paramétrer le SMTP avec Sengrid
 
-Dans /confog/envirronement.rb
+Dans /config/envirronement.rb
 
 	ActionMailer::Base.smtp_settings = {
 	  :user_name => ENV['SENDGRID_LOGIN'],

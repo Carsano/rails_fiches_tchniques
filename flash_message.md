@@ -30,7 +30,7 @@
 
 ### Bootstrap n'utilise pas les mêmes termes des 4 types de flash
 
-==> dans application_helper.rb
+==> dans app/helper/application_helper.rb
 
 	def bootstrap_class_for_flash(type)
 	  case type
@@ -50,10 +50,8 @@
 	<% flash.each do |type, msg| %>
 	# pour chaque flash, affiche
 
-	  <div class="alert <%= bootstrap_class_for_flash(type) %> alert-dismissable fade
-	                    # donne le type de flash 
-
-	  show" role="alert">
+	  <div class="alert <%= bootstrap_class_for_flash(type) %> alert-dismissable fade show" role="alert">
+		# donne le type de flash
 
 	    <%= msg %>
 	    # le message du flash

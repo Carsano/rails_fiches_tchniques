@@ -277,7 +277,7 @@ Ex de pimpage de la view pour le sign_up avec Bootstrap
 ### current_user
 ==> le user devient current_user quand l'utilisateur est connecté
 
-### athenticate_user!
+### authenticate_user!
 ==> permet de ne donner l'accès à une page qu'aux utilisateurs connectés
 ==> s'utilise dans les callbacks dans les controllers
 

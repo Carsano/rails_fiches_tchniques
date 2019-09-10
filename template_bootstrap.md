@@ -23,7 +23,7 @@ ATTENTION
 
 ## Télécharger le dossier du template 
 
-## Copier/coller tout le code du du fichier index.html présent dans le template bootstrap dans l'index de l'appli
+## Copier/coller tout le code du fichier index.html présent dans le template bootstrap dans l'index de l'appli
 
 ## Attention à bien conserver les lien <%  %> dans le <head>
 
@@ -36,7 +36,7 @@ ATTENTION
 
 ## En fonction de ce qu'il y a dans ce dossier
 
-==> copier/coller les dossiers css et js du lib/assets du template (s'il u en a) dans le lib/assets de l'appli
+==> copier/coller les dossiers css et js du lib/assets du template (s'il y en a) dans le lib/assets de l'appli
 
 	├── lib
 	  │   └── assets
@@ -124,7 +124,7 @@ A priori, ces fichiers sont dans les assets de lib et/ou vendor
 
 
 	 *= require assets/css/bootstrap
-	 *= require assets/css/animate.css
+	 *= require assets/css/animate
 
 ### faire de même pour le js
 
