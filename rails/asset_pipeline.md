@@ -14,4 +14,6 @@ L'asset pipeline récupère le js et le css dans app/assets
 # $ rails assets:clean assets:precompile
 ==> une fois css js ok
 
+# Dans config/environments/production.rb
 
+==> mettre config.assets.compile = true

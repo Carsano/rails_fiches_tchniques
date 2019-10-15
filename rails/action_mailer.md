@@ -22,6 +22,9 @@ Rails dispose d'un outil de gestion des envois d'e-mail plutôt bien conçu : Ac
 - installation de la gem 'letter_opener' dans Gemfile
 - $ bundle install
 - Colle les lignes config.action_mailer.delivery_method = :letter_opener et config.action_mailer.perform_deliveries = true dans config/environments/development.rb
+
+# Devise: ajouter config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 - dans le terminal, faire une création d'instance
 - Tu devrais voir un visuel de l’e-mail que tu as rédigé en HTML s'afficher dans ton navigateur !
 
@@ -69,7 +72,7 @@ Ex avec un email de bienvenue lors de l'inscription sur l'appli
 	  end
 	end
 
-### crée un dossier user_mailer dans aap/views
+### crée un dossier user_mailer dans app/views
 
 Création d'un template d'email dans app/views/user_mailer/
 
@@ -94,7 +97,7 @@ Création d'un template d'email dans app/views/user_mailer/
 	  </body>
 	</html>
 
--template de type text: welcome_email.text.erb
+-template de type text: welcome_email.txt.erb
 
 	Salut <%= @user.name %> et bienvenue chez nous !
 	==========================================================
@@ -180,9 +183,12 @@ Toutefois, pour des raisons de fiabilité d’envoi depuis des adresses gratuite
 	  - Rajoute gem 'dotenv-rails' à ton Gemfile et fait le $ bundle install
 	  - Et l'étape cruciale qu'on oublie trop souvent : ouvre le fichier .gitignore à la racine de ton app Rails et écris .env dedans.
 
+### Dans config/environnement/production.rb
+
+Mettre: config.action_controller.default_url_options = {:host => "app_name"}
 ### paramétrer le SMTP avec Sengrid
 
-Dans /config/envirronement.rb
+Dans /config/envirronement.rb, rajouter
 
 	ActionMailer::Base.smtp_settings = {
 	  :user_name => ENV['SENDGRID_LOGIN'],
