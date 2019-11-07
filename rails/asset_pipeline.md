@@ -7,11 +7,13 @@ Qu'est ce que l'Asset Pipeline ? Le but de l'Asset Pipeline est d'optimiser l'ac
 
 # Asset pipeline gère le css et le javascript, mais va bientôt être remplacé par Webpack dans rails v6
 ==> pour ne pas activer asset pipeline
+
 $ rails new -d postgresql appname --skip-sprockets
 
 L'asset pipeline récupère le js et le css dans app/assets
 
 # $ rails assets:clean assets:precompile
+
 ==> une fois css js ok
 
 # Dans config/environments/production.rb

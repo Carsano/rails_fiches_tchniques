@@ -1,5 +1,15 @@
 
-# -------------- ActiveStorage -----------------
+# -------------- Active Storage -----------------
+
+https://www.engineyard.com/blog/active-storage
+
+https://edgeguides.rubyonrails.org/active_storage_overview.html
+
+https://prograils.com/posts/rails-5-2-active-storage-new-approach-to-file-uploads
+
+### pour has_many_attached chargements de plusieures photos en même temps
+https://www.youtube.com/watch?v=A23zCePXe74
+https://evilmartians.com/chronicles/rails-5-2-active-storage-and-beyond
 
 Active Storage est une fonctionnalité sympathique de Rails qui permet à un utilisateur de votre app de mettre en ligne des fichiers qui pourront ensuite être utilisés dans son site web. L'exemple typique est le fait d'envoyer une photo de profil : celle-ci est alors stockée dans le cloud et l'app Rails peut l'appeler à tout moment afin de l'afficher où bon vous semble. Il est bien évidemment possible de l'utiliser pour d'autres fichiers comme des pdf ou autres.
 
@@ -10,8 +20,16 @@ Active Storage est une fonctionnalité sympathique de Rails qui permet à un uti
 ## Prérequi
 
 ### appli rails
+
 ### un Model + BDD
+
+$ rails g model ModelName ....
+
+$ rails db:migrate
+
 ### un Controller + View associée
+
+$ rails g controller index ....
 
 ## $ rails active_storage:install
 
@@ -21,13 +39,14 @@ Active Storage est une fonctionnalité sympathique de Rails qui permet à un uti
 
 ## $ rails db:migrate
 
+## has_one_attached
+
 ## Lier des fichiers à des entrées en BDD (ex pour les users)
 
 ==> La première étape est d'indiquer au Model User qu'il pourra être lié à un objet d'Active Storage portant le nom avatar
 
 		class User < ApplicationRecord
 		  has_one_attached :avatar == avatar unique
-	OU  has_many_attached :avatar == plusieurs avatars
 		end
 
 ==> à partir de là, plusieurs méthodes d'instance user sont possibles
@@ -37,6 +56,7 @@ Active Storage est une fonctionnalité sympathique de Rails qui permet à un uti
 	<%= form.file_field :avatar %> == permet l'upload du fichier de l'avatar dans la view
 
 	user.avatar.attach(params[:avatar]) == lie l'avatar au user, une fois le fichier uploadé 
+
 
 ## Un controller avatars
 
@@ -67,9 +87,6 @@ Les avatars peuvent être considérés comme une ressource à part entière.
 
 	class AvatarsController < ApplicationController
 
-		def new
-			@user = User.find(params[:user_id])
-		end
 	  def create
 
 	    @user = User.find(params[:user_id])
@@ -108,8 +125,199 @@ Les avatars peuvent être considérés comme une ressource à part entière.
 	  # on peut aussi imposer une photo de profil
 	<%end%>
 
+==> bon à savoir, téléchargement de l'avatar 
+
+	<%= link_to 'Download', @user.avatar, download: ''%>
+
+## has_many_attached
+
+### model 
+
+		class User < ApplicationRecord
+			has_many_attached :avatars 
+		end
+
+==> à partir de là, plusieurs méthodes d'instance user sont possibles
+
+	user.avatars.attached? == si l'instance a un avatar(boolean)
+
+	<%= form.file_field :avatars %> == permet l'upload du fichier de l'avatar dans la view
+
+	user.avatars.attach(params[:avatars]) == lie l'avatar au user, une fois le fichier uploadé 
+
+### Tests
+
+==> $ rc et création d'un objet
+
+user = User.create(....)
+
+==> dans le controller, def show 
+
+@user = User.find(params[:id]) 
+
+==> dans routes.rb 
+
+resources :users, only: [:show]
+
+==> dans show.html.erb 
+
+	<h1>Page Profil</h1>
+
+	<p>Bienvenue sur la page d'ajout d'un avatar pour le User portant l'id : <%=@user.id%></p>
+	<h3>Avatar actuel</h3>
+	<%if @user.avatars.attached?%>
+	  <% @user.avatars.each do |image| %>
+	  	<%= image_tag image %> <br />
+		<% end %>
+	<%else%>
+	  <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
+	<%end%>
+
+==> test en faisant .../users/1
+
+### Un controller avatars
+
+$ rails g controller avatars new create
+
+==> dans routes.rb, on va imbriquer la route de l'avatar à celle du user
+
+	Rails.application.routes.draw do
+	  resources :users, only: [:show] do
+	    resources :avatars, only: [:create]
+	  end
+	  # de cette manière un avatar est associé au user correspondant
+	end
+
+==> $ rails routes
+
+	 Prefix Verb      URI          Pattern                            Controller#Action
+
+	 user_avatars     POST  /users/:user_id/avatars(.:format)          avatars#create
+	 new_user_avatar  GET   /users/:user_id/avatars/new(.:format)       avatars#new
+	         user     GET  /users/:id(.:format)                          users#show
+
+==> retour au avatars_controller
+
+	class AvatarsController < ApplicationController
+
+	  def create
+
+	    @user = User.find(params[:user_id])
+	    #identifie l'utilisateur concerné
+
+	    @user.avatar.attach(params[:avatar])
+	    # on lui attribue l'avatar dont la référence est contenue dans params[:avatar]
+
+	 OU @user.avatars.attach(params[:avatars]) 
+	 		# si has_many_attached
+
+	    redirect_to(user_path(@user))
+	    # on redirige vers la page show de cet utilisateur
+
+	  end
+	end
+
+==> dans le controller files_controller.rb 
+
+	module Admin
+
+		class FilesController < ApplicationController
+
+			def show
+				@file = ActiveStorage::Attachment.find(params[:id])
+				# permet d'afficher la file 
+
+			end
+
+			def create
+				@project = Project.find(params[:project_id])
+
+				if @project.files.attach(params[:files])
+		    	flash[:success] = 'Photos chargées!'
+		    	redirect_to admin_project_path(@project)
+		   #  else
+		   #  	flash[:error] = 'Ya un blème... Retentes!'
+					# render 'new'
+				end
+			end
+
+			def edit
+				
+			end
+
+			def update
+				
+			end
+
+			def destroy
+				
+			end
+
+			private
+
+			def files_params
+
+			end
+		end
+
+	end
+
+##  Mise en place de les Views
+
+==> l'upload de fichier 
+
+	<h3>Changer d'avatar ?</h3>
+
+	<%= form_tag project_files_path(@project), multipart: true do |file| %>
+	  <%= file_field_tag :files, multiple: true %>
+	  													# permet de charger plusieurs files en une fois
+	  													# ou multiply si chargements en plusieurs fois
+	  <%= submit_tag "mettre à jour" %>
+	<% end %>
+
+==> dans le show.html.erb du user: à insérer dans le code du show 
+
+	<h1>Page Profil</h1>
+
+	<p>Bienvenue sur la page d'ajout d'un avatar pour le User portant l'id : <%=@user.id%></p>
+	<h3>Avatar actuel</h3>
+	<%if @user.avatars.attached?%>
+	  <% @user.avatars.each do |image| %>
+	  	<%= image_tag image %> <br />
+		<% end %>
+	<%else%>
+	  <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
+	<%end%>
+
+## Accéder aux data de l'image
+
+	ActiveStorage::Analyzer::ImageAnalyzer.new(self.profil).metadata
+
+==> sort {:width => '', :height => ''}
+
+==> .metadata[:width]
+
+==> .metadata[:height]
+
+## On peut combiner avec gem 'mini_magick'
+
+cf ruby/gems/gem_mini_magick.md
+
+
+# Pour has_many_attached
+# @user.avatars == array d'avatars!!!!
+# donc pour afficher le premier == @user.avatars[0] ......
+
+# Avec cette méthode pour has_many_attached == chargement de plusieures photos, mais une à la fois!!!!
+# Sinon
+
+https://www.youtube.com/watch?v=A23zCePXe74
+
+
 
 ## Configurer Active Storage en production
+
+# Supprimer les attachment active_storage lors du passage à heroku
 
 ==> stockage en local, dans config/environments/development.rb
 
@@ -138,29 +346,100 @@ Pour stocker les fichiers de ton app en production de façon pérenne, tu vas de
 
 ### Inscription + Récupérer des clefs d'API
 
+https://medium.com/alturasoluciones/setting-up-rails-5-active-storage-with-amazon-s3-3d158cf021ff
+
+https://www.youtube.com/watch?v=RKJQOj6RG9g (début)
+
+==> créer son compte aws
+
+==> taper S3 ans la barre de recherche AWS services et sélectionner S3 scalable storage in the cloud
+
+==> cliquer sur Create bucket
+
+- remplir bucket name + region
+- next
+- next 
+- next 
+- create bucket
+
+==> taper IAM dans la barre de recherche et sélectionner IAM Manage user access and exceptions keys
+
+==> cliquer sur users 
+
+==> add user
+
+- rentrer un nom de user + access type 'Programmatic access'
+- next:permissions
+- cliquer sur Attach existing policies
+- cocher AmazonS3FullAccess 
+- next:tags
+- next:review
+- next:create
+
+==> clés API
+
 ### Configurer Active Storage
+
+- dans storage.yml, décommenter les config de base du prestataire
+
+		amazon:
+			service: S3
+			access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+			secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+			region: us-east-1
+			bucket: your_own_bucket
+
+ - dans Gemfile
+
+gem "aws-sdk-s3", require: false
+
+$ bundle install
+
+ - dans storage.yml, mettre les clés API
+
+		amazon:
+			service: S3
+			#access_key_id: <%= ENV['AMAZON_ACCESS_KEY_ID'] %>
+			#secret_access_key: <%= ENV['AMAZON_SECRET_ACCESS_KEY'] %>
+			region: us-east-1 
+			#a priori, si tu es en France, il faut mettre ici : eu-west-3
+			bucket: your_own_bucket
+			#Mets ici le nom de ton bucket
+
+
+- créer/mettre les clés API dans .env et .env dans .gitignore
+
+		AMAZON_ACCESS_KEY_ID= 'AKIAKOB5SEYHW8APSIYQ'
+		AMAZON_SECRET_ACCESS_KEY= 'vCxbJWzolEJCLqZ4zXcSBgT5i9mAQCYMSw1zXyu'
+
+# Test 
+
+- dans config/environments/development.rb, change la ligne
+
+		config.active_storage.service = :amazon
+
+- aller voir dans le bucket créé si l'image chagée y est bien!!!
+
+# Test en local!!
 
 - dans config/environments/production.rb, change la ligne
 
 		config.active_storage.service = :amazon
 
-- dans storage.yml, décommenter les config de base du prestataire et met les clés API
 
-		amazon:
-			service: S3
-			access_key_id: <%= ENV['AMAZON_ACCESS_KEY_ID'] %>
-			secret_access_key: <%= ENV['AMAZON_SECRET_ACCESS_KEY'] %>
-			region: us-east-1 
-			#a priori, si tu es en France, il faut mettre ici : eu-west-3
-			bucket: your_own_bucket
-			#Mets ici le nom de ton bucket. Par exemple : prisme
+### passer les clés API à Heroku
 
-
-- mettre les clés API dans .env et .env dans .gitignore
-
-		AMAZON_ACCESS_KEY_ID= 'AKIAKOB5SEYHW8APSIYQ'
-		AMAZON_SECRET_ACCESS_KEY= 'vCxbJWzolEJCLqZ4zXcSBgT5i9mAQCYMSw1zXyu'
-
-- passer les clés API à Heroku
+https://devcenter.heroku.com/articles/config-vars
 
 		$ heroku config:set AMAZON_ACCESS_KEY_ID=AKIAKOB5SEYHW8APSIYQ
+
+OU plus simple
+
+==> les rentrer dans config var sur heroku!!
+
+### $ git add + git push origin master
+
+### $ git push heroku master
+
+### $ heroku run bundle install
+

@@ -37,17 +37,11 @@ https://www.grafikart.fr/tutoriels/tp-admin-858
 		user_signed_in? && current_user.admin == true
 	end
 
-## Controller
+## dans app/controllers
 
 ### Créer un dossier admin qui va contenir les controllers relatif à la section admin
 
 ==> avantage de différencier les controllers de la section admin des autres controllers de l'appli
-
-### créer un dossier apliccation_controller.rb
-
-### créer le ou les controllers du dossier admin à la main
-
-==> fonctionne comme n'importe quel controller
 
 ### Dans le dossier admin
 
@@ -138,7 +132,7 @@ Dans Eventbrite, l'admin a besoin de gérer les users, les events, les attendees
 
 ==> dedans, créer un sous-dossier pour chaque controller 
 
-==> créer un index.html.erb pour chaque controller
+==> créer un index.html.erb ou plus pour chaque controller
 
 ## Restriction accès page admin
 
@@ -169,6 +163,25 @@ Dans Eventbrite, l'admin a besoin de gérer les users, les events, les attendees
 		end
 
 	end
+
+==> cas d'un unique accès admin user == admin (création en bd)
+
+	module Admin
+		class ApplicationController < ::ApplicationController
+			before_action :only_admin
+
+				private
+				
+				def only_admin
+					if current_user == nil
+						flash[:errors] = "Vous n'avez pas le droit d'accéeder à cette page!"	
+						redirect_to root_path
+					end
+				end
+		end
+	end
+
+
 
 
 

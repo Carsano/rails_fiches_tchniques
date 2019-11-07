@@ -241,6 +241,7 @@ Une fois ta/tes tables migrées ($ rails db:migrate), teste-la/les dans la conso
 
 ### FAIS UN MAX DE TESTS EN CONSOLE APRÈS CRÉATION DE TES TABLES HISTOIRE DE NE PAS ÊTRE SURPRIS PAR LA SUITE!!!!
 
+
 # Création des Controllers et Views
 
 Le controller agit en tant que chef d'orchestre de l'application.

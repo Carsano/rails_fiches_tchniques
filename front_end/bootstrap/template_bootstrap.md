@@ -23,9 +23,11 @@ ATTENTION
 
 ## Télécharger le dossier du template 
 
-## Copier/coller tout le code du fichier index.html présent dans le template bootstrap dans l'index de l'appli
+## Dans application.html.erb
 
-## Attention à bien conserver les lien <%  %> dans le <head>
+==> Copier/coller tout le code du fichier index.html présent dans le template bootstrap
+
+==> Attention à bien conserver les lien <%  %> dans le <head>
 
 		<%= csrf_meta_tags %>
 	  <%= csp_meta_tag %>
@@ -33,6 +35,11 @@ ATTENTION
 	  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+==> pour mettre le template en responsive, ajouter dans le <head> 
+
+ <meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+
 
 ## En fonction de ce qu'il y a dans ce dossier
 
@@ -118,6 +125,8 @@ De base ton app rails va s'initialiser en checkant uniquement le app/assets, il 
 	 css/animate.css
 
 	 etc
+
+	 */
 
 ==> mettre devant *= require assets/ et enlever le .css
 A priori, ces fichiers sont dans les assets de lib et/ou vendor

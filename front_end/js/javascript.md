@@ -1,5 +1,18 @@
 # ************* JAVASCRIPT ****************
 
+==> toutes les opérations que l'on peut faire sur les objets js
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/
+
+==> LA ressource où aller pour se mettre à jour sur JavaScript et être au fait des dernières tendances du langage
+
+https://javascript.info/
+
+==> track 
+
+https://www.codecademy.com/catalog/subject/all 
+
+
 ## Règles de bases
 
 ### fichier de type script.js 
@@ -15,9 +28,9 @@
 ## Règles en plus
 
 
-    - Chaque instruction en JS se termine par un point-virgule. Ce n'est pas toujours indispensable, notamment si tu sautes des lignes entre chaque instruction. Mais autant ne pas prendre de risque quand on débute : mets systématiquement des ;.
+    - Chaque instruction en JS se termine par un point-virgule
 
-    - JS n'est pas sensible aux espaces donc n'hésite pas à indenter ton code, comme tu l'as fait en Ruby.
+    - JS n'est pas sensible aux espaces donc n'hésite pas à indenter ton code
 
     - Les commentaires s'écrivent avec // sur une ligne ou /* sur plusieurs lignes */ ainsi :
 
@@ -39,9 +52,9 @@
 
 ### Il existe trois types de déclaration de variable
 
-==>let myVariable; variable valable pour un bloc code
+==> let myVariable; == variable valable pour un bloc code
 
-==> var myVariable; variable valable pour le bloc code et le bloc principal
+==> var myVariable; == variable valable pour le bloc code et le bloc principal
 
 ==> const myVariable; == variable dont on ne peut changer la valeur
 
@@ -91,17 +104,35 @@
 
 Le fonctionnement des arrays en JS est très proche du Ruby.
 
-==> Créer un array se fait de la façon suivante : let statusDeTHP = ["Moussaillon", "Corsaire", "Renégat"];. Bien évidemment, on peut mélanger différents types de variables dans un array : number, string, booléen, etc.
+==> Créer un array se fait de la façon suivante: 
+
+let statusDeTHP = ["Moussaillon", "Corsaire", "Renégat"]; 
+
+Bien évidemment, on peut mélanger différents types de variables dans un array : number, string, booléen, etc.
 
 ==> On accède à un élément de l'array comme en Ruby : la numérotation commence à zéro. Ainsi, statusDeTHP[0] retournera "Moussaillon".
     
-==> La taille d'un array s'obtient avec statusDeTHP.length;
+==> La taille d'un array:
+
+statusDeTHP.length;
     
-==> On peut modifier la valeur d'une entrée avec statusDeTHP[0] = "La moussaille"
+==> Modifier la valeur d'une entrée: 
+
+statusDeTHP[0] = "La moussaille"
     
-==> On peut rajouter des entrées avec statusDeTHP.push("Flibustier") qui rajoute une entrée à la fin du array ou statusDeTHP.unshift("Pirate") qui en rajoute une au début.
+==> On peut rajouter des entrées: 
+
+statusDeTHP.push("Flibustier") == rajoute une entrée à la fin du array
+
+statusDeTHP.unshift("Pirate") == rajoute une au début.
     
-==> La fonction statusDeTHP.pop() supprime le dernier élément tandis que statusDeTHP.shift() supprimera le premier. Tu peux aussi enlever plusieurs éléments avec statusDeTHP.splice(0,2) qui enlèvera 2 éléments à partir de l'indice 0.
+==> supprimer des élément: 
+
+statusDeTHP.pop() == le dernier 
+
+statusDeTHP.shift() == supprimera le premier 
+
+statusDeTHP.splice(0,2) == enlèvera 2 éléments à partir de l'indice 0.
     
 ==> La fonction statusDeTHP.slice(2,4) te retourne un array issue du array initial (une sorte de sous-array). Ses valeurs seront celles comprises entre l'index 2 (inclus) et 4 (exclus).
 
@@ -115,9 +146,21 @@ En plus de la concaténation de base vue plus haut ("Bonjour" + " " + "Monde"), 
       console.log("Bonjour à tous les "+ a);
       console.log(a + "3");
 
-==> Par contre JS n'accepte pas la syntaxe suivante let a = "coucou" * 2.
+# ==> Par contre JS n'accepte pas la syntaxe suivante let a = "coucou" * 2.
 
-==> On peut inclure la valeur d'une variable au sein d'un string en le déclarant ainsi: `ceci est la valeur de ma variable a : ${a}`. Notez l'usage des ` ` pour identifier le string et de ${xx} pour identifier la variable à injecter dans le string. C'est l'équivalent du Ruby "coucou #{variable}". Teste cela :
+## .repeat
+
+ex:
+
+    let a = "coucou"
+
+    a.repeat(2) = "coucou" * 2 !!!
+
+==> On peut inclure la valeur d'une variable au sein d'un string en le déclarant ainsi: `ceci est la valeur de ma variable a : ${a}`. 
+
+# Notez l'usage des ` ` pour identifier le string et de ${xx} pour identifier la variable à injecter dans le string. C'est l'équivalent du Ruby "coucou #{variable}".
+
+Teste cela :
 
     let numStudent = 4;
     let statement = `Dans mon groupe on est ${numStudent} moussaillons`;
@@ -125,31 +168,36 @@ En plus de la concaténation de base vue plus haut ("Bonjour" + " " + "Monde"), 
 
 ==> Comme en Ruby, une chaîne de caractères peut être considérées comme un array contenant, dans chaque case, un caractère. Ainsi avec .length tu obtiens sa longueur, avec "The Hacking Project"[0] tu obtiens la lettre "T", etc.
 
-==> Tu peux aller faire une recherche au sein du string avec .indexOf. Ainsi "The Hacking Project".indexOf("Hack") te retournera l'index 4 (le mot "Hack" commence à l'index 4 du string). Si tu obtiens -1 c'est que ça n'a pas été trouvé.
+==> Tu peux aller faire une recherche au sein du string avec .indexOf.
 
-==> Les fonctions suivantes permettent de passer en minuscule / majuscule un string : toLowerCase() et toUpperCase().
+"The Hacking Project".indexOf("Hack") == 4 (le mot "Hack" commence à l'index 4 du string). 
 
-==> La fonction split(",") permet de découper un string en fonction d'un séparateur (la virgule ici) pour retourner un array de strings. Teste cela :
+Si tu obtiens -1 c'est que ça n'a pas été trouvé.
+
+==> Les fonctions suivantes permettent de passer en minuscule / majuscule un string
+
+toLowerCase() et toUpperCase()
+
+==> split(",") == découpe un string en fonction d'un séparateur (la virgule ici) pour retourner un array de strings.
 
     const contentOfTHP = "Git-Ruby-Rails-HTML-CSS-JS";
     const lesson = contentOfTHP.split("-");
     console.log(lesson[0]); // "Git"
     console.log(lesson[5]); // "JS"
 
-==> La fonction join(",") fait l'exact inverse de split(",") : elle produit un string en concaténant tous les éléments d'un tableau et en rajoutant, entre chaque élément, un séparateur (une virgule ici).
+==> join(",") == l'exact inverse de split(","): elle produit un string en concaténant tous les éléments d'un tableau et en rajoutant, entre chaque élément, un séparateur (une virgule ici).
 
 
 ## Les objets littéraux
 
-Comme tu le sais, JavaScript est un langage orienté objet : la notion d'objet est donc très couramment utilisée. Toutefois, ici, nous ne te présenterons pas le fonctionnement complet de la POO en JavaScript et allons nous contenter de parler des objets littéraux. Ils te donneront un micro aperçu de la POO en JS mais sans rentrer trop dans toute sa complexité.
+JavaScript est un langage orienté objet. Toutefois, ici, nous ne te présenterons pas le fonctionnement complet de la POO en JavaScript et allons nous contenter de parler des objets littéraux. Ils te donneront un micro aperçu de la POO en JS mais sans rentrer trop dans toute sa complexité.
 Les objets littéraux, en JS, sont à mi-chemin entre un hash Ruby (on les définit sans créer de classe) et un objet Ruby (on peut leur définir des attributs et des fonctions).
-
-Ci-dessous tu trouveras les principales fonctionnalités d'un objet JS : prends bien le temps de tester l'ensemble des fonctionnalités que je te présente ici dans ton script.js sinon tu n'apprendras rien !
 
 ==> On définit un objet JS de la façon suivante (exemple d'un objet comportant des infos sur la session 2 de THP) :
 
     let THPSessionNum2 = {
       numOfMouss: 80,
+      # attribut: fonction
       cities: ["Paris", "Lyon", "Montpellier"],
       successRate: 0.80,
       sessionMoto: "keep pushing to the top"
@@ -162,10 +210,16 @@ Ci-dessous tu trouveras les principales fonctionnalités d'un objet JS : prends 
 
 ==> On peut également modifier un attribut ou même en rajouter un avec myObject.attribut = xxxx. Exemple (à partir de l'objet ci-dessus):
 
-    THPSessionNum2.numOfMouss = 79; // je modifie un attribut existant
+    THPSessionNum2.numOfMouss = 79; 
+    // je modifie un attribut existant
+
     console.log(THPSessionNum2.numOfMouss);
-    THPSessionNum2.favoriteLesson = "Présentation de Sinatra" //je rajoute un attribut
-    console.log(THPSessionNum2); //j'imprime tout l'objet pour voir
+
+    THPSessionNum2.favoriteLesson = "Présentation de Sinatra" 
+    //je rajoute un attribut
+
+    console.log(THPSessionNum2); 
+    //j'imprime tout l'objet pour voir
 
 ==> Tu peux également accéder aux attributs en utilisant la syntaxe myObject['attribut']. C'est très utile quand le nom de l'attribut est contenu dans une autre variable. Exemple à partir de l'objet ci-dessus :
 
@@ -175,33 +229,45 @@ Ci-dessous tu trouveras les principales fonctionnalités d'un objet JS : prends 
 
 ## Les conditions
 
-Tout comme en Ruby, JavaScript gère les conditions à la sauce if, else et else if. Pour cela, il faut connaître les opérateurs de comparaison en JS : ils sont QUASIMENT identiques à ceux en Ruby… Voyons ça en détail:
+JavaScript gère les conditions à la sauce if, else et else if. Pour cela, il faut connaître les opérateurs de comparaison en JS : ils sont QUASIMENT identiques à ceux en Ruby:
 
-    >= signifie "supérieur ou égal à". > signifie strictement supérieur
-    <= signifie "inférieur ou égal à". < signifie strictement inférieur
-    !== signifie "contenu ou type différent de". Veuillez noter qu'il y a 2 signes "égal".
-    === signifie "contenu ET type égal à". Veuillez noter qu'il y a 3 signes "égal".
+    >= signifie "supérieur ou égal à". 
 
-# En JS, il existe un opérateur == (deux signes "égal") et un opérateur === (trois signes "égal"). Ils sont très différents : == va comparer uniquement le contenu des deux variables alors que === va comparer le contenu et le type. Ainsi :
+    > signifie strictement supérieur
+
+    <= signifie "inférieur ou égal à". 
+
+    < signifie strictement inférieur
+
+    != signifie "contenu (= valeur) différent de"
+
+    !== signifie "contenu ET type différent (string, integer, ...) de".
+
+    == signifie "contenu différent de"
+
+    === signifie "contenu ET type égal à".
+
+ex:
 
 	console.log("36" == 36); // va retourner TRUE car le contenu est identique
+
 	console.log("36" === 36); // va retourner FALSE car d'un côté on a un string et de l'autre un number
 
-Aussi, quand on débute, il est fortement conseillé de se contenter d'utiliser === sinon tu risques d'avoir des surprises.
+Quand on débute, il est fortement conseillé de se contenter d'utiliser === sinon tu risques d'avoir des surprises.
 
 De même, on a un opérateur != (compare le contenu) et un !== (compare le contenu et le type) : utilise !== au maximum quand tu commences en JS.
 
 
 ==> Un bloc if de base se construit ainsi :
 
-    let number = 2; //fais ensuite le test avec d'autres valeurs
+    let number = 2; 
     if(number > 0) {
       console.log("number est positif");
     } 
 
 ==> On peut rajouter des résultats alternatifs avec else if et else. Exemple :
 
-    let number = 0; //fais ensuite le test avec d'autres valeurs (positives et négatives)
+    let number = 0;
     if(number > 0) {
       console.log("number est positif");
     } else if(number === 0) {
@@ -210,7 +276,9 @@ De même, on a un opérateur != (compare le contenu) et un !== (compare le conte
       console.log("number est négatif");
     } 
 
-==> Les opérateurs logiques en JS sont les mêmes qu'en Ruby : && signifie ET, || signifie OU et ! signifie NON. Exemples :
+==> Les opérateurs logiques en JS sont les mêmes qu'en Ruby : && signifie ET, || signifie OU et ! signifie NON. 
+
+Exemples :
 
     if (true && true) {
       console.log("ce message s'affiche car avec un ET, si les deux conditions sont à TRUE, le résultat est TRUE");
@@ -222,7 +290,8 @@ De même, on a un opérateur != (compare le contenu) et un !== (compare le conte
       console.log("ce message s'affiche car un NON sur FALSE donne TRUE");
     }
 
-==>Quand on a plusieurs scénarios possibles, on peut utiliser la condition switch … case. C'est l'équivalent JavaScript du case … when en Ruby. À noter que l'instruction break permet de sortir d'un case et que tous les cas non décrits dans les case finissent dans la partie default. Voici la syntaxe :
+==> Quand on a plusieurs scénarios possibles, on peut utiliser la condition switch … case. C'est l'équivalent JavaScript du case … when en Ruby. 
+À noter que l'instruction break permet de sortir d'un case et que tous les cas non décrits dans les case finissent dans la partie default. Voici la syntaxe :
 
     weekNum = 1; //teste avec plusieurs valeurs
     switch (weekNum) {
@@ -256,7 +325,17 @@ De même, on a un opérateur != (compare le contenu) et un !== (compare le conte
         break;
     }
 
-==> Dernier point important : comme en Ruby, certaines valeurs peuvent être évaluées à FALSE dans le code. Mais en Ruby, ça n'est valable que pour la valeur nil alors qu'en JS, c'est le cas de la valeur undefined, du nombre 0 et du string vide "". Illustration :
+==> Dernier point important : comme en Ruby, certaines valeurs peuvent être évaluées à FALSE dans le code. Mais en Ruby, ça n'est valable que pour la valeur nil alors. 
+
+# En JS, c'est le cas de la valeur undefined, du nombre 0 et du string vide "". 
+
+- undifined variable == FALSE
+
+- 0 == FALSE
+
+- "" == FALSE
+
+Illustration :
 
     let number = 0; //fais aussi le test avec un chiffre non nul
     if (number) {
@@ -279,7 +358,7 @@ Tout comme en Ruby, on peut faire des boucles en JS. Tu ne devrais pas être tro
 
 ==> On peut faire des boucles for basées sur la valeur d'une variable (un compteur). La syntaxe est la suivante :
 
-### for([initialisation]; [condition]; [incrémentation]) { };
+### for([initialisation de la variable]; [condition]; [incrémentation]) { };
 
     for(let count = 0; count <=5; count++){
       console.log(`on va compter jusqu'à 5 : ${count}`);
@@ -287,7 +366,9 @@ Tout comme en Ruby, on peut faire des boucles en JS. Tu ne devrais pas être tro
     console.log(count); // Va créer une erreur car count est en let et donc son scope est limité au bloc for.
     //passe count en var pour tester ce que ça donne
 
-==> On peut également faire des boucles while sous la forme while([condition] { }; qui tourne tant que la condition est vérifiée. Exemple en utilisant la commande prompt() qui ouvre une fenêtre d'input dans ton navigateur :
+### while([condition] { }; => tourne tant que la condition est TRUE. 
+
+# prompt() == ouvre une fenêtre d'input dans ton navigateur (== gets.chomp en ruby)
 
     let answer = "";
     while(answer !== "oui") {
@@ -305,20 +386,33 @@ Tout comme en Ruby, on peut faire des boucles en JS. Tu ne devrais pas être tro
         letter = prompt('Tape UNE lettre stp :');
 
         if (letter) {
-            word += letter; //on rajoute la lettre saisie à la suite du mot
+            word += letter; 
+            //on rajoute la lettre saisie à la suite du mot
+
             console.log(word);
-        } else { // on rentre dans ce else si letter est vide (l'utilisateur ne saisit rien)
-            break; // On quitte la boucle
+        } else { 
+          // on rentre dans ce else si letter est vide (l'utilisateur ne saisit rien)
+
+            break; 
+            // On quitte la boucle
         }
     }
+
     console.log(`voilà ce que tu as tapé : ${word}`);
 
-==> On peut parcourir les array et les objets en JS grâce à l'instruction for in. Pour un array, elle permet d'obtenir un compteur qui va prendre toutes les valeurs entre zéro et le dernier index. Pour un objet, le compteur va prendre chaque valeur des attributs, une à une. Illustration :
+
+### On peut parcourir les array et les objets en JS grâce à l'instruction for in 
+
+Pour un array, elle permet d'obtenir un compteur qui va prendre toutes les valeurs entre zéro et le dernier index.
+
+Pour un objet, le compteur va prendre chaque valeur des attributs, une à une. 
+
+Illustration :
 
     //On déclare d'abord un array
-      let weeksOfTHPArray = ["Semaine 1 - Introduction au Code", "Semaine 2 - Découverte de Ruby", "Semaine 3 - Programmation Orientée Objet", "Semaine 4 - Initiation à Rails"];
+    let weeksOfTHPArray = ["Semaine 1 - Introduction au Code", "Semaine 2 - Découverte de Ruby", "Semaine 3 - Programmation Orientée Objet", "Semaine 4 - Initiation à Rails"];
 
-    //On déclare ensuite un objet
+    //On déclare ensuite un OBJET
     let weeksOfTHPObject = {Semaine5: "Rails intermédiaire", Semaine6: "Rails avancé", Semaine7: "HTML / CSS et intro au JS", Semaine8: "JavaScript de front"};
 
     console.log("**********Parcourons le array :")
@@ -333,7 +427,14 @@ Tout comme en Ruby, on peut faire des boucles en JS. Tu ne devrais pas être tro
       console.log(weeksOfTHPObject[weekAttribut]);
     }
 
-==> JavaScript dispose même d'un .forEach() qui ne fonctionne que sur les array. Il permet d'obtenir directement la valeur stockée à chaque index du array. Illustration en reprenant le array weeksOfTHPArray ci-dessus :
+### .forEach() == ne fonctionne que sur les array!!! 
+
+Il permet d'obtenir directement la valeur stockée à chaque index du array. 
+
+Illustration en reprenant le array weeksOfTHPArray ci-dessus:
+    
+    //On déclare d'abord un array
+    let weeksOfTHPArray = ["Semaine 1 - Introduction au Code", "Semaine 2 - Découverte de Ruby", "Semaine 3 - Programmation Orientée Objet", "Semaine 4 - Initiation à Rails"];
 
     console.log("**********Parcourons le array en forEach :")
     weeksOfTHPArray.forEach(weekContent => {
@@ -345,7 +446,11 @@ Tout comme en Ruby, on peut faire des boucles en JS. Tu ne devrais pas être tro
 
 Évidemment, comme tout langage qui se respecte, on peut définir des fonctions en JS (l'équivalent de nos méthodes en Ruby). La syntaxe est relativement différente par contre :
 
-==> Une fonction se définit en faisant function nomDeMaFonction(){ //le code };. On l'appelle ensuite en faisant un nomDeMaFonction(). À noter qu'en JS, contrairement au Ruby, une fonction est toujours exécutée avec des parenthèses. Illustration d'une fonction de base :
+### Une fonction se définit en faisant function nomDeMaFonction(){ //le code };. 
+
+On l'appelle ensuite en faisant un nomDeMaFonction(). À noter qu'en JS, contrairement au Ruby, une fonction est toujours exécutée avec des parenthèses. 
+
+Illustration d'une fonction de base:
 
     function sayHello() {
       console.log("Bonjour toi !");
@@ -353,7 +458,9 @@ Tout comme en Ruby, on peut faire des boucles en JS. Tu ne devrais pas être tro
 
     sayHello();
 
-    Comme en Ruby, on peut définir des données en entrée de la fonction et des données à retourner avec return. Exemple :
+### Comme en Ruby, on peut définir des données en entrée de la fonction et des données à retourner avec return. 
+
+Exemple :
 
     function multiply(inputNumber1, inputNumber2) {
       let outputNumber = inputNumber1 * inputNumber2;
@@ -364,7 +471,9 @@ Tout comme en Ruby, on peut faire des boucles en JS. Tu ne devrais pas être tro
     console.log(multiply(2, multiply(2,3)));
     console.log(outputNumber); // Va créer une erreur car la variable en let n'existe pas en dehors de la fonction
 
-==> JavaScript nous permet de déclarer d'autres façons nos fonctions. Par exemple par le biais de fonctions anonymes (sans nom) que l'on peut ensuite affecter à une variable en faisant myVariable = function(entrée1, ...){ }! C'est un mode de fonctionnement que tu n'as jamais vu en Ruby. Illustration :
+### JavaScript nous permet de déclarer d'autres façons nos fonctions. Par exemple par le biais de fonctions anonymes (sans nom) que l'on peut ensuite affecter à une variable en faisant myVariable = function(entrée1, ...){ }! C'est un mode de fonctionnement que tu n'as jamais vu en Ruby. 
+
+Illustration :
 
     const multiply = function(inputNumber1, inputNumber2) {
       let outputNumber = inputNumber1 * inputNumber2;

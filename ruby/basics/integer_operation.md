@@ -12,6 +12,11 @@ integer / integer
 
 integer.div(n) == integer/n
 
+### ^
+
+exclusif == sorte de !=
+
+integer ^ integer
 
 ### arrondir
 
@@ -55,10 +60,11 @@ ex: [0, 1, 2][a <=> b] == 0 si a < b, 1 si a > b, 2 si a == b
 
 integer % num == 0 == integer multiple de num
 
-### pair/impair
+### question
 
-integer.even? 
-
+integer.even? == pair 
+integer.odd? == impair
+integer.between?(x, y) == compris entre
 ### racine carrée
 
 Math.sqrt(interger)
@@ -72,6 +78,12 @@ integer.to_s
 ### valeur absolue
 
 integer.abs
+
+### Question
+
+==> quel type d'element?
+
+integer.is_a?(Integer)
 
 
 

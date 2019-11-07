@@ -50,7 +50,7 @@
 	<% flash.each do |type, msg| %>
 	# pour chaque flash, affiche
 
-	  <div class="alert <%= bootstrap_class_for_flash(type) %> alert-dismissable fade show" role="alert">
+	  <div class="alert <%= bootstrap_class_for_flash(type) %> alert-dismissable show" role="alert">
 		# donne le type de flash
 
 	    <%= msg %>
@@ -63,7 +63,7 @@
 	<% end %>
 
 
-### Dans layouts/application.rb 
+### Dans layouts/application.html.erb 
 
 	<%= render 'layouts/flash'%>
 

@@ -1,6 +1,8 @@
 
 # ************* gem Devise **************
 
+https://www.grafikart.fr/tutoriels/devise-omniauth-859
+
 Devise permet de créer un système d'authentification complet en gérerant pour toi :
 
     L'inscription, avec mot de passe et e-mail sécurisé ;
@@ -42,13 +44,32 @@ Devise permet de créer un système d'authentification complet en gérerant pour
 
 ==> fichier devise.rb dans /config/initializers
 
-    le fichier de configuration de Devise. On s'en servira par exemple pour paramétrer le service que l'on va utiliser pour les envois d'e-mails
+    le fichier de configuration de Devise. 
+    On s'en servira par exemple pour paramétrer le service que l'on va utiliser pour les envois d'e-mails
 
 ==> fichier devise.en.yml dans /config/locales
 
     un fichier contenant les messages d'erreur de Devise.
+    traduire les différents messages
 
-# Mettre config.action_mailer.default_url_options = { host: 'localhost', port: 3000 } dans config/environments/develpment.rb
+==> mettre les alertes au niveau de l'application
+
+==> générer les vues : $ rails g devise:views
+
+# Dans config/environments/develpment.rb
+
+==> mettre config.action_mailer.default_url_options = { host: 'localhost', port: 3000 } dans config/environments/develpment.rb
+
+ET/OU (si pas Sendgrid ou autre)
+
+==> on configurer un serveur smtp
+
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+  address: 'localhost', 
+  port: 1025 ou 3000
+}
 
 # Devise
 
@@ -69,6 +90,12 @@ Pour dire à Devise quel model va être géré par elle
           ## Database authenticatable
           Si un model User existe déjà, AVEC des entrées similaires, genre :email et :encrypted_password
           ==> supprimer ces colonnes
+
+          t.string :email, null: false, default:""
+          t.string :encrypted_password, null: false, default: ""
+
+          t.string :username, null :false, default: ""
+          ==> pour un pseudo !!!!
 
           ## Recoverable
           t.string   :reset_password_token
@@ -101,6 +128,10 @@ Pour dire à Devise quel model va être géré par elle
         end
 
         add_index :users, :email,                unique: true
+
+        add_index :users, :username,    unique: true
+        ==> si pseudo, pour ne pas avoir les mêmes !!!!
+
         add_index :users, :reset_password_token, unique: true
         # add_index :users, :confirmation_token,   unique: true
         # add_index :users, :unlock_token,         unique: true
@@ -125,6 +156,8 @@ Pour dire à Devise quel model va être géré par elle
       end
     end
 
+==> $ rails db:migrate
+
 ### 2) Modifier le model auquel Devise s'applique
 
     class User < ApplicationRecord
@@ -139,6 +172,8 @@ Ces quelques lignes vont juste dire à ton model, "hey, c'est possible de faire,
 ### 3) Création de nouvelles routes
 
 ATTENTION: pas de controllers devise user généré....
+
+Devise créé un devise_for avec un scope :users
 
 # ATTENTION: dans routes.rb, mettre les routes devise en premier, sinon les routes des autres controllers (notamment users) vont croiser celles de devise!!!!!
 
@@ -269,17 +304,87 @@ Ex de pimpage de la view pour le sign_up avec Bootstrap
 
 ## Intégration des views Devise dans l'appli
 
+# Messages d'alerte == application.html.erb 
+
+    <p class="notice"><%= notice %></p> 
+    <p class="alert"><%= alert %></p>
+
 # Devise utilise des helpers importants à mettre dans les views de l'appli
 
 ### user_signed_in? == l'utilisateur est-il connecté?
+
 ==> s'utilise en condition d'accès à certaine page: "si l'utilisateur est connecté..."
 
 ### current_user
-==> le user devient current_user quand l'utilisateur est connecté
+
+==> donne l'utilisateur en cours
 
 ### authenticate_user!
+
 ==> permet de ne donner l'accès à une page qu'aux utilisateurs connectés
+
 ==> s'utilise dans les callbacks dans les controllers
+
+# BONUS: pour afficher réponse à user_signed_in? et infos sur la session user, on peut mettre sous le <%=yield %> de application.html.erb
+
+    <%= debug user_signed_in? %>
+    <%= debug session.to_hash %>
+
+# BONUS: si envie de demander un pseudo au user pour se connecter avec son pseudo
+
+### Rollbacker ou le faire tout de suite
+
+### Dans la migration ajouter t.string :username + unique (cf plus haut)
+
+### Dans les views (devise/registration), rajouter un champ pour le username
+
+==> pb: il faut dire à devise que l'on veut rajouter ce champs
+
+==> dans application_controller.rb, ajouter before_action:configure_devise_parameters, if: :devise_controller?
+
+==> créer la méthode
+
+    def configure_devise_parameters
+      devise_parameter_sanitizer.permit(sign_up) {|u| u.permit(:username, :email, :password, :password_confirmation)}
+    end
+
+$ rs
+
+==> rajouter un validate dans model User
+
+    validates :username, presence: true, uniqueness: {case_insensitive: false}, format: {with: mettre le regex en fonction de ce qu'on veut}
+
+==> changer les règles de connexion, ajouter une méthode dans model User
+
+    def self.find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup 
+
+      if login = conditions.delete(:login)
+
+        where(conditions.to_hash).where("lower(username) = :value OR lower(email) = :value", value: login.downcase).first
+
+      else
+        
+        where(conditions.to_hash).first
+      end
+    end
+
+==> renommer le champ dans le formulaire
+
+par ex :login
+
+==> ce champ n'existe pas dans devise 
+
+==> dans model User 
+
+attr_accessor :login
+
+==> dans initializers 
+
+décommenter config.authentication_keys = [:login]
+
+==> soit utilisation de l'email ou username
+
 
 ## En prod (Heroku)
 

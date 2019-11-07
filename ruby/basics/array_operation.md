@@ -10,7 +10,11 @@
 
 ==> a = [*1..5] == [1, 2, 3, 4, 5]
 
-==> Array(1..n) == [1, 2, 3, 4, n]
+==> Array(1..n) == [1, 2, 3, 4, n] == Array[](1, 2, 3, 4, n)
+
+==> [1, 2, 3, 4, n]
+
+==> %w[1 2 3 4 5 6] == ["1", "2", ...]
 
 ### insertion array
 
@@ -30,6 +34,10 @@ array = [0, 1, 2, 3, 4] OU [0, 1, 2, -2, -1]
 ## opérations
 
 # différence entre ! et pas ==> ! ne sort pas un autre array
+
+### %letter
+
+https://simpleror.wordpress.com/2009/03/15/q-q-w-w-x-r-s/
 
 ### 2 arrays in one hash
 
@@ -73,6 +81,10 @@ array.last
 
 array.min == sort l'element premier en fonction de l'alphabet
 array.max ==                dernier
+
+### comparaison
+
+[a, b, ...][e] == si e == a ==> a, etc...
 
 ### compter
 
@@ -144,13 +156,17 @@ array.all?(&:positive)
 
 array.include?(element)
 
+==> quel type d'element?
+
+array.is_a?(Array)
+
 ### remplacer
 
 array.replace([....]) == replace content of an array with a new one
 
 ### selectionner
 
-array.select {|item| block } == get the item selected
+array.select {|item| block } == get the item selected ==> New Array
 array.select
 
 ### si array dans array en un seul
@@ -180,6 +196,8 @@ array.delete(object)
 array.uniq == supprrime les elts en double
 
 array.reject{|x| x...}
+
+
 
 ### with_index
 
