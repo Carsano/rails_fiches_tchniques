@@ -38,7 +38,7 @@ ATTENTION
 
 ==> pour mettre le template en responsive, ajouter dans le <head> 
 
- <meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+		<meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
 
 
 ## En fonction de ce qu'il y a dans ce dossier

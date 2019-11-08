@@ -7,6 +7,8 @@
 ### $ cd nom_app
 ==> n'oublie pas de rentrer dans ton nom_app
 
+### Créer repo github et brancher l'app
+
 ### Gemfile
 ==> mets tes gems préférées, genre:
 	- gem 'devise'
@@ -20,17 +22,18 @@
 ==> installation des gems
 
 ### $ rails db:create 
+
 ==> création de ta base de données PostgreSQL
 
-# pour Devise ==> penser à mettre en place Devise en premier lieu pour éviter de modifier la migration créée par Devise concernant le Model User 
+### Devise ==> penser à mettre en place Devise en premier lieu pour éviter de modifier la migration créée par Devise concernant le Model User 
 
-# pour interface admin, mettre cash une colonne admin dans la table users fixée à False
+# Si user et user/admin, pour interface admin, mettre cash une colonne admin dans la table users fixée à False
 
-# Brancher Action_mailer
+### Brancher Action_mailer
 
-# pour moyen de paiement par carte: brancher Stripe
+### pour moyen de paiement par carte: brancher Stripe
 
-# pour Html == 3 possibilités
+### pour Html == 3 possibilités
 
 ==> kit ui
 

@@ -14,6 +14,8 @@ OU
 	  add_column :users, :password_digest, :string
 	end
 
+## $ rails db:migrate
+
 ## Mettre has_secure_password dans User
 
 	class User < ApplicationRecord
@@ -31,6 +33,13 @@ OU
 => S’il correspond, bcrypt te retourne tout simplement l'objet my_user.
 
 - Enfin, tu peux faire comme près de 100 % des sites sur Terre et demander, à l'inscription, un password et sa confirmation. Dans ce cas-là, tu peux faire User.create(password: "motdepasse", password_confirmation: "laconfirmation") et bcrypt n'enregistrera un utilisateur en base QUE si password et password_confirmation sont identiques. Sinon Rollback.
+
+## Création en rails console d'un user
+
+==> $ rails console
+
+==> User.create(name:' ', password:' ')
+
 
 # Pour la prod ==> créer l'admin!!!!
 

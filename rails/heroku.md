@@ -82,8 +82,7 @@ create a new app == app-name-staging
 ==> dans appli-staging
 
  - Overview: installer add-ons Postgre
-						 Dyno formation == ON
- - Resources: verif add-ons et Free Dynos activated
+ - Resources: verif add-ons
  - Deploy: clicker sur connect on github/selectionner la repo
  					clicker sur enable automatic deploy et manual deploy
  - Settings: config vars == entrer les clé API
@@ -152,6 +151,8 @@ $ heroku logs --source app --ps worker
 ## $ heroku run rails db:migrate
 
 ## +/- $ heroku run rails db:seed (si seed présent)
+
+## +/- $ heroku run rails console
 
 ### $ git heroku logs ou $ git heroku --tail
 
