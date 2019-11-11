@@ -1,6 +1,10 @@
-## lancer $ rails new -d postgresql name
+# Préparation
 
-## Créer la repo github et brancher l'appli
+## Créer la repo Github
+
+## $ rails new -d postgresql app-name
+
+## Brancher app-name avec repo github
 
 ==> git remote add origin ...
 
@@ -14,11 +18,8 @@
 
 ## $ rails db:create
 
-## Intégrer template / kit_ui_bootswatch.md
 
-==> cf template_bootstrap.md/kit_uibootswatch.md
-
-## Créer controller static_pages + router pour l'instant sur home
+# Créer controller static_pages + router pour l'instant sur home
 
 $ rails controller static_pages home about contact
 
@@ -28,15 +29,22 @@ root to: "static_pages#home"
 get 'static_pages#contact'
 get 'static_pages#about'
 
-## Heroku
 
-Plus vite l'appli est banché en prod, mieux c'est pour tester en live
+# Intégrer template / kit_ui_bootswatch.md
+
+==> cf template_bootstrap.md/kit_uibootswatch.md
+
+
+# Heroku
+
+Plus vite l'appli est banché en staging et prod, mieux c'est pour tester en live
 
 ==> cf heroku.md 
 
+
 # Tests
 
-## Model + Controller
+# Model + Controller
 
 ==> cf mvc.md
 
@@ -44,39 +52,46 @@ Plus vite l'appli est banché en prod, mieux c'est pour tester en live
 
 ==> Controller Projects
 
-
-#Tests
-
-## Log_in 
-
-==> cf gem_bcrypt.md + admin_sessionsimple.md
-
-#Tests
+# Tests + Heroku
 
 
-## Intégration des flash bootstrap ou non
+# Interface admin 
+
+## Log-in 
+
+==> cf gem_bcrypt.md
+
+## Sessions 
+
+==> admin_sessionsimple.md
+
+# Tests + Heroku
+
+
+# Intégration des flash bootstrap ou non
 
 ==> cf flash_message.md
 
 
-## Interface admin
+# Active Storage
 
-==> cf admin_section.md
+## cf active_storage.md 
 
-## Active Storage
+## has_many_attached: simple mosaique avec accès un élément
 
-==> cf active_storage.md 
+==> surtout pour images en vrac avec pas de réel position
 
-==> has_many_attached: simple mosaique avec accès un élément
-Difficilement gérable, surtout pour changer une photo....
+==> Difficilement gérable, surtout pour changer une photo....
 
-==> has_one_attached * nombre de fichier lié: plus de souplesse dans l'affichage 
+## has_one_attached * nombre de fichier lié: plus de souplesse dans l'affichage et le remplacement 
 
-#Tests
+# Tests + Heroku
 
-## Contact_form
+# Contact_form
 
-cf contact_form.md
+## cf contact_form.md
+
+# Tests + Heroku
 
 
 
