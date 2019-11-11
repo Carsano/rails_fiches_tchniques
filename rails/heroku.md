@@ -168,6 +168,10 @@ Create pipeline
 ### git push origin master
 
 
+# $ heroku login 
+
+==> permet de se connecter au bon compte heroku
+
 # $ git push heroku master
 
 ==> push la remote sur heroku-staging
