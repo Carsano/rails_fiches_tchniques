@@ -1,4 +1,7 @@
-# Si envoi de mails Sengrid ou autre, configurer pour la production
+
+# Préparation
+
+## Si envoi de mails Sengrid ou autre, configurer pour la production
 
 ex:
 
@@ -11,7 +14,8 @@ config.consider_all_requests_local = true
 config.action_mailer.default_url_options = { :host => 'point-budget.herokuapp.com' }
 
 ==> cf. action_mailer.md
-# si envoi de mail suite à un contact_form
+
+## si envoi de mail suite à un contact_form
 
 	config.action_mailer.default_url_options = { :host => 'new_app_name.herokuapp.com' }  
 	config.action_mailer.delivery_method = :smtp  
@@ -27,9 +31,9 @@ config.action_mailer.default_url_options = { :host => 'point-budget.herokuapp.co
 	  authentication:       'plain',
 	  enable_starttls_auto: true  }
 
-# Asset pipeline
+## Asset pipeline
 
-## $ rails assets:clean assets:precompile
+### $ rails assets:clean assets:precompile
 
 ==> Elle aura pour effet de faire le ménage dans les assets que n'utilises plus, puis de compiler les assets pour la production.
 
@@ -39,7 +43,7 @@ config.action_mailer.default_url_options = { :host => 'point-budget.herokuapp.co
 
 ==> cf asset_pipeline.md 
 
-# Active Storage(dans developpements/production.rb)
+## Active Storage(dans developpements/production.rb)
 
 ==> config.active_storage.service = :local
 
@@ -50,7 +54,7 @@ On peut tester en prod pendant 24h
 cf. active_storage.md
 
 
-### AVOIR COMMITÉ et PUSHER sur github !!!!
+# AVOIR COMMITÉ et PUSHER sur github !!!!
 
 $ git add .
 
@@ -58,111 +62,168 @@ $ git commit -m ""
 
 $ git push origin master
 
-### $ heroku create app-name (sauf si création sur heroku)
+(## $ heroku create app-name (sauf si création sur heroku)
 
 ==> crée une application sur Heroku, lié à l'application
 
 ==> changer le nom de l'app 
 
-$ heroku apps:rename new-app-name
+$ heroku apps:rename new-app-name)
 
 
-### Préparation Heroku.com 
+# Préparation Heroku.com 
 
-==> create a new pipeline staging
+==> create a new pipeline: remplir
 
-==> Settings
+- Pipeline name
+- Connect to Github tout de suite
 
-- brancher le Pipeline conected to Github à la repo github
+Create pipeline
 
-==> pipeline/staging
+# Heroku-App-Staging
 
-create a new app == app-name-staging
+==> Staging
 
-==> dans appli-staging
+ - Create a new app
+ - App name
+ - Choose a region
+ - Pipeline stage == staging
+ - Create app
 
- - Overview: installer add-ons Postgre
+ - Overview: installer add-ons Postgresql + autres
  - Resources: verif add-ons
- - Deploy: clicker sur connect on github/selectionner la repo
- 					clicker sur enable automatic deploy et manual deploy
+ - Deploy: clicker sur enable automatic deploy
  - Settings: config vars == entrer les clé API
  						 add buildpack == heroku/ruby
 
-==> pipeline.production
 
-create/add app == app-name
+## $ git remote add heroku <url remote staging>
 
-==> dans appli-prod
+==> création de la remote heroku-staging
 
-idem staging except enable automatic deploy
+## git remote --v ou git config --list | grep heroku
 
-### $ heroku login
+==> permet de voir les remotes git et heroku
 
-==> il faut être connecté au compte heroku souhaité!!!!
-
-==> conecte l'appli au compte heroku
-
-### git remote --v ou git config --list | grep heroku
-
-==> permet de voir si nouvelle remote heroku branché à la remote github
-
-### $ heroku git:remote -a app-name
-
-==> crée la remote heroku
-
-### git remote set-url heroku <repo git>
+## git remote set-url heroku <remote heroku name>
 
 ==> permet de changer la remote heroku
 
+## $ git remote rm <remote name> 
 
-# $ git remote --v 
-
-==> Vérifier que les remotes soient les bonnes == celles qui pointent vers staging !!!!!
+==> supprimer une remote
 
 
-### $ git push heroku master
+## En team 
 
-==> push la remote sur heroku
+- le but sera de créer une branche develoment ou staging afin d'éviter de push sur master
 
-### Si pb
+- créer une work-branch
 
-==> d'abord $ heroku restart 
+- pusher la work-branch sur github
 
-==> $ heroku logs ou heroku logs --tail ou heroku logs --source app --tail
+- faire une pull request pour merger la work-branch sur development ou staging
 
-==> heroku logs 
+- faire une pull request pour merger development ou staging sur master
 
-==> only app logs 
+### $ git checkout -b staging
 
-$ heroku logs --source app -t
+==> création de la branche staging et on se met dessus cash
 
-==> router logs
+### $ git checkout -b work-branch
 
-$ heroku logs --ps router
+==> effectuer les changements
 
-==> chain them 
+==> $ git commit work_branch
 
-$ heroku logs --source app --ps worker
+### $ git checkout staging
 
-### $ heroku run bundle install
+### $ git pull origin staging
 
-### Si base de données
+### $ git checkout work_branch
 
-## $ heroku run rails db:migrate
+### $ git merge staging + gestion des conflits
 
-## +/- $ heroku run rails db:seed (si seed présent)
+### $ git push origin work_branch
 
-## +/- $ heroku run rails console
+### Github pull request pour merger sur staging
 
-### $ git heroku logs ou $ git heroku --tail
+### Github pull request pour merger staging sur master
 
-==> permet de voir les pb à régler si rien ne s'affiche!!!
 
-Si besoin
+## En solo
 
-### heroku pg:reset DATABASE
+### $ git checkout -b work-branch
+
+==> effectuer les changements
+
+==> $ git commit work_branch
+
+### $ git checkout master
+
+### $ git pull origin master
+
+### $ git merge work_branch + gestions conflits
+
+### git push origin master
+
+
+# $ git push heroku master
+
+==> push la remote sur heroku-staging
+
+==> Cliquer sur Open app
+
+
+## Si pb
+
+==> $ heroku logs ou $ heroku --tail
+
+Permet de voir les pb à régler si rien ne s'affiche!!!
+
+==> $ heroku restart 
+
+## $ heroku run bundle install
+
+
+## Si db
+
+### $ heroku run rails db:migrate
+
+### +/- $ heroku run rails db:seed (si seed présent)
+
+### +/- $ heroku run rails console
+
+### +/- $ heroku pg:reset DATABASE
 
 ==> reset les tables 
+
+
+# Heroku-App-Production
+
+==> Production
+
+ - Create a new app
+ - App name
+ - Choose a region
+ - Pipeline stage == production
+ - Create app
+
+ - Overview: installer add-ons idem staging
+ - Settings: config vars == idem clés API ....
+ 						 add buidlpacks = idem staging
+
+## Clicker sur Promote to production
+
+## $ heroku run bundle install -a mon-app-prod
+
+
+## Si db !!!!
+
+### $ heroku run rails db:migrate -a mon-app-prod
+
+### $ heroku run rails db:seed -a mon-app-prod
+
 
 
 
