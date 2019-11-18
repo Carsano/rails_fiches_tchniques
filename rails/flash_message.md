@@ -43,7 +43,7 @@
 
 # Les flash s'utilisent un peu comme les partials
 
-### Dans layouts, crée un fichier _flash.html.erb
+### Dans views/layouts, crée un fichier _flash.html.erb
 
 ==> contiendra le message à afficher
 

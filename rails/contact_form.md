@@ -9,7 +9,7 @@ In July 2019, Heroku updated the bundler requirement, so we simply need to upgra
 
 ## Gemfile
 
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6' (non installé, pb...)
 gem 'mail_form'
 gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
 gem 'dotenv-rails', groups: [:development, :test]
@@ -29,7 +29,7 @@ GMAIL_PASSWORD=your_gmail_password
 
 ## Créer à la main un model Contact
 
-	class Home < MailForm::Base
+	class Contact < MailForm::Base
 	  attribute :name,      :validate => true
 	  attribute :email,     :validate => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
 	  attribute :objet			:validate => true
@@ -99,12 +99,6 @@ GMAIL_PASSWORD=your_gmail_password
 
 ## Views in contact 
 
-### render form_partial dans contact/indes.html.erb
-
-	 <div id="contact">
-	   <%= render 'contact_form' %>
-	 </div>
-
 ### partial contact_form.html.erb
 
 	<%= form_for @contact, url: home_index_path, remote: true do |f| %>
@@ -130,6 +124,14 @@ GMAIL_PASSWORD=your_gmail_password
 	<div class="col-md-6" id="flash-message">
 	  <%= render 'flash' %>
 	</div>
+
+
+### render contact_form dans contact/index.html.erb
+
+	 <div id="contact">
+	   <%= render 'contact_form' %>
+	 </div>
+
 
 ### +/- partial flash.html.erb
 
@@ -207,8 +209,10 @@ GMAIL_PASSWORD=your_gmail_password
 ## in config/environments/development.rb
 
 	  config.action_mailer.perform_deliveries = true
-# already here
+
+		# already here
 	  config.action_mailer.raise_delivery_errors= true
+	  
 	  config.action_mailer.delivery_method = :smtp
 	  config.action_mailer.smtp_settings = {
 	    address:              'smtp.gmail.com',
