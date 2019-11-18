@@ -6,9 +6,11 @@ https://github.com/minimagick/minimagick
 
 ## sudo apt-get install imagemagick
 
+## Restart server
+
 ## Ex for model Project has_one_attached :image
 
-## (require 'mini_magick' in controllers images)
+## require 'mini_magick' in the controller or model where the image is resized
 
 ## in model Project
 

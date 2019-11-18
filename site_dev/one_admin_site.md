@@ -41,18 +41,7 @@ Plus vite l'appli est banché en staging et prod, mieux c'est pour tester en liv
 
 ==> cf heroku.md 
 
-
 # Tests
-
-# Model + Controller
-
-==> cf mvc.md
-
-==> Model Project...
-
-==> Controller Projects
-
-# Tests + Heroku
 
 
 # Interface admin 
@@ -63,14 +52,9 @@ Plus vite l'appli est banché en staging et prod, mieux c'est pour tester en liv
 
 ## Sessions 
 
-==> admin_sessionsimple.md
+==> admin_section_simple.md
 
 # Tests + Heroku
-
-
-# Intégration des flash bootstrap ou non
-
-==> cf flash_message.md
 
 
 # Active Storage
@@ -86,6 +70,23 @@ Plus vite l'appli est banché en staging et prod, mieux c'est pour tester en liv
 ## has_one_attached * nombre de fichier lié: plus de souplesse dans l'affichage et le remplacement 
 
 # Tests + Heroku
+
+
+# Model + Controller hors admin
+
+==> cf mvc.md
+
+==> Model Project...
+
+==> Controller Projects
+
+# Tests + Heroku
+
+
+# Intégration des flash bootstrap ou non
+
+==> cf flash_message.md
+
 
 # Contact_form
 

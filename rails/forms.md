@@ -65,9 +65,54 @@ option min:, max:, in:, step:
 
 option diabled:, size:, maxlength:
 
-- radio
+### radio_button_tag
 
 		<%= radio_button_tag(:name, value, checked, options={})%> 
+
+ex: radio btn pour deux formulaires qui apparaîssent en fonction du click oui ou non
+
+		<%= radio_button_tag(:answer, "yes")%>
+		#Attention, l'id que l'on vise en js pour dérouler le reste du formulaire est :answer, "yes" == answer_yes
+	  <%= label_tag(:answer_yes, "Oui")%>
+	  <%= radio_button_tag(:answer, "no") %>
+	  # id == answer_no
+	  <%= label_tag(:answer_no, "Non") %>
+
+les deux forms:
+		
+		<div id="consumption" style="display:none;">
+      <p>Consommation annuelle en kWh
+      <%= number_field_tag "yearly_consumption", nil, step: 1, class: 'd-flex justify-content-end' %>
+      </p>
+    </div>
+    <div id="estimation" style="display:none;">
+      <h3>Estimation de votre consommation :</h3>
+      <p>Superficie en m²
+      <%= number_field_tag "floor_space", nil, step: 1 , class: 'd-flex justify-content-end'%>
+      </p>
+      <p> Type de chauffage
+      <%= select_tag "heat_type", options_for_select(["", "Gaz", "Electricite", "Autre" ], "Non renseignée"), class: 'd-flex justify-content-end'%>
+      </p>
+    </div>
+
+en js:
+		
+		radioYes = document.getElementById("answer_yes");
+    radioNo = document.getElementById("answer_no");
+
+    // it show the two differents form of the gas simulation
+
+    radioYes.addEventListener('click', function () {
+        $('#consumption').show(500);
+        $('#estimation').hide(500);
+    });
+
+    radioNo.addEventListener('click', function () {
+        $('#consumption').hide(500);
+        $('#estimation').show(500);
+    });
+
+# Attention si plusieurs radio button dans un formulaire de donner des id différents :)
 
 options disabled:
 
@@ -153,6 +198,22 @@ options same as text_field_tag
 	    <%= f.text_area :body, size: "60x12" %>
 	    <%= f.submit "Create" %>
 	  <% end %>
+
+ou 
+
+
+		<%= form_for '@article, url: path, method: :method) do |f| %>
+		  <%= f.text_field :title %>
+		  <%= f.text_area :body, size: "60x12" %>
+		  <%= f.submit "Create" %>
+		<% end %>
+
+
+Attributs:
+
+- placeholder: ou :value => ' ' == valeur que l'on rentre (edit)
+
+
 
 
 # Possibiltés de champs == idem que form_tag, mais sans le tag et avec f. !!!!

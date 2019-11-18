@@ -18,3 +18,9 @@ Revenir en development
 
 $ export RAILS_ENV=development
 
+## pb git reset --hard SHA
+
+Si veut pas pusher
+
+==> $ git push origin HEAD --force
+

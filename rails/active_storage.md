@@ -39,6 +39,8 @@ $ rails g controller index ....
 
 ## $ rails db:migrate
 
+
+
 ## has_one_attached
 
 ## Lier des fichiers à des entrées en BDD (ex pour les users)
@@ -64,7 +66,7 @@ Les avatars peuvent être considérés comme une ressource à part entière.
 
 ==> On va donc créer un avatars_controller, qui va héberger une def create et/ou new(si on passe par une page spécial d'upload de fichier)
 
-	$ rails g controller avatars new create
+	$ rails g controller avatars new create destroy
 
 ==> dans routes.rb, on va imbriquer la route de l'avatar à celle du user
 
@@ -86,6 +88,10 @@ Les avatars peuvent être considérés comme une ressource à part entière.
 ==> retour au avatars_controller
 
 	class AvatarsController < ApplicationController
+		
+		def show
+			@user = Project.find(params[:user_id])
+		end
 
 	  def create
 
@@ -99,6 +105,48 @@ Les avatars peuvent être considérés comme une ressource à part entière.
 	    # on redirige vers la page show de cet utilisateur
 
 	  end
+
+		def destroy
+			@user = Project.find(params[:user_id])
+		  @user.avatar.purge
+		  redirect_to edit_admin_project_path(@project)
+		end
+	end
+
+# Si interface admin_session_simple
+
+==> créer le controller à la main dans Admin
+
+	module Admin
+		class AvatarsController < ApplicationController
+			def show
+				@project = Project.find(params[:project_id])
+			end
+
+			def create
+				@project = Project.find(params[:project_id])
+
+				@project.avatar.attach(params[:avatar])
+		    redirect_to ton_path
+			end
+
+			def destroy
+				@project = Project.find(params[:project_id])
+			  @project.avatar.purge
+			  redirect_to ton_path
+			end
+		end
+	end
+
+==> dans routes.rb, on va imbriquer la route de l'avatar à celle de l'admin
+
+	Rails.application.routes.draw do
+	  namespace :admin do
+		  resources :projects do
+		  	resources :avatars
+		  end
+		end
+	  # de cette manière un avatar est associé au projet correspondant de la section admin
 	end
 
 
@@ -112,7 +160,7 @@ Les avatars peuvent être considérés comme une ressource à part entière.
 	  <%= submit_tag "mettre à jour" %>
 	<% end %>
 
-==> dans le show.html.erb du user: à insérer dans le code du show
+==> dans le show.html.erb du user
 
 	<h1>Page Profil</h1>
 
@@ -128,6 +176,13 @@ Les avatars peuvent être considérés comme une ressource à part entière.
 ==> bon à savoir, téléchargement de l'avatar 
 
 	<%= link_to 'Download', @user.avatar, download: ''%>
+
+
+# Si admin_session_simple
+
+==> mettre les views dans le dossier admin
+
+
 
 ## has_many_attached
 
@@ -217,7 +272,7 @@ $ rails g controller avatars new create
 	  end
 	end
 
-==> dans le controller files_controller.rb 
+==> Si interface admin, dans admin/files_controller.rb 
 
 	module Admin
 
@@ -352,17 +407,22 @@ https://www.youtube.com/watch?v=RKJQOj6RG9g (début)
 
 ==> créer son compte aws
 
-==> taper S3 ans la barre de recherche AWS services et sélectionner S3 scalable storage in the cloud
+==> rentrer cb
+
+==> taper S3 dans la barre de recherche AWS services et sélectionner S3 scalable storage in the cloud
 
 ==> cliquer sur Create bucket
 
-- remplir bucket name + region
-- next
-- next 
-- next 
-- create bucket
+- Name and region: remplir bucket name + region
+- Configure options: next
+- Set permissions: next 
+- Review: create bucket
 
-==> taper IAM dans la barre de recherche et sélectionner IAM Manage user access and exceptions keys
+==> clique sur Services
+
+==> taper IAM dans la barre de recherche
+
+==> sélectionner IAM Manage user access and exceptions keys
 
 ==> cliquer sur users 
 
@@ -376,7 +436,9 @@ https://www.youtube.com/watch?v=RKJQOj6RG9g (début)
 - next:review
 - next:create
 
-==> clés API
+==> clés API du users
+
+==> laisser la fenêtre ouverte
 
 ### Configurer Active Storage
 
@@ -391,7 +453,7 @@ https://www.youtube.com/watch?v=RKJQOj6RG9g (début)
 
  - dans Gemfile
 
-gem "aws-sdk-s3", require: false
+		gem "aws-sdk-s3", require: false
 
 $ bundle install
 
@@ -407,12 +469,11 @@ $ bundle install
 			#Mets ici le nom de ton bucket
 
 
-- créer/mettre les clés API dans .env et .env dans .gitignore
+- créer fichier .env, mettre .env dans .gitignore et copier/mettre les clés API du user créé sur AWS
 
 		AMAZON_ACCESS_KEY_ID= 'AKIAKOB5SEYHW8APSIYQ'
 		AMAZON_SECRET_ACCESS_KEY= 'vCxbJWzolEJCLqZ4zXcSBgT5i9mAQCYMSw1zXyu'
 
-# Test 
 
 - dans config/environments/development.rb, change la ligne
 
@@ -420,7 +481,7 @@ $ bundle install
 
 - aller voir dans le bucket créé si l'image chagée y est bien!!!
 
-# Test en local!!
+# Test en local!! N'a pas marché pour moi....
 
 - dans config/environments/production.rb, change la ligne
 
@@ -436,6 +497,8 @@ https://devcenter.heroku.com/articles/config-vars
 OU plus simple
 
 ==> les rentrer dans config var sur heroku!!
+
+==> les mettres en staging et en production
 
 ### $ git add + git push origin master
 

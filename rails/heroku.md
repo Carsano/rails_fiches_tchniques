@@ -198,9 +198,20 @@ Permet de voir les pb à régler si rien ne s'affiche!!!
 
 ### +/- $ heroku run rails console
 
-### +/- $ heroku pg:reset DATABASE
+
+## Si modification db 
+
+### $ heroku restart
+
+### $ heroku pg:reset DATABASE
 
 ==> reset les tables 
+
+### $ heroku run rails db:migrate
+
+### +/- $ heroku run rails db:seed (si seed présent)
+
+### +/- $ heroku run bundle install
 
 
 # Heroku-App-Production
@@ -227,6 +238,28 @@ Permet de voir les pb à régler si rien ne s'affiche!!!
 ### $ heroku run rails db:migrate -a mon-app-prod
 
 ### $ heroku run rails db:seed -a mon-app-prod
+
+### $ heroku pg:reset DATABASE -a mon-app-prod
+
+
+## Si modification db 
+
+### $ heroku restart -a mon-app-prod
+
+### $ heroku pg:reset DATABASE -a mon-app-prod
+
+==> reset les tables 
+
+### $ heroku run rails db:migrate -a mon-app-prod
+
+### +/- $ heroku run rails db:seed -a mon-app-prod (si seed présent)
+
+
+### $ git push --force heroku master 
+
+forcer git push heroku master, notamment quand on a dû forcer git push origin master
+
+
 
 
 
