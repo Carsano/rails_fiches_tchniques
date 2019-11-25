@@ -49,7 +49,7 @@ option :disabled, :multiple, :accept
 
 option :data, :disabled, confirm: 'question?'
 
-- label
+### label == entête de chaque champs du form
 
 		<%= label_tag(:name) %>
 
@@ -152,7 +152,7 @@ options :data == add custom data
 
 options: same as text_field_tag
 
-- textarea
+### textarea
 
 		<%= text_area_tag(name, content=nil, options)%>
 
@@ -162,15 +162,25 @@ options :size
 				:diabled
 				:escape
 
-- text_field
+ex:
 
-		<%= text_field_tag(name, value, :options => {})%>
+	<%= text_area_field :moe, value=resource.moe, rows: 3, class: "form-control" %>
+
+
+### text_field
+
+		<%= text_field_tag(name, value=, :options => {})%>
 
 options :disabled
 				:size
 				:maxlength
 				:placeholder
 				:value
+
+ex: 
+
+	<%= text_field_tag 'realisation', value=@project.realisation, class: "form-control" %>
+
 
 - time 
 
@@ -199,7 +209,7 @@ options same as text_field_tag
 	    <%= f.submit "Create" %>
 	  <% end %>
 
-ou 
+ou possibilité de mentionner le model
 
 
 		<%= form_for '@article, url: path, method: :method) do |f| %>
@@ -222,6 +232,10 @@ Pour les partials:
 
 	<%= form_for(resource, url: path, method: method)  do |f| %>
 	<% end %>
+
+## textarea
+
+	<%= f.text_area :moe, value:resource.moe, rows: 3, class: "form-control" %>
 
 
 ## form_with

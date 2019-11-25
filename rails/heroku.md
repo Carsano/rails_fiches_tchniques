@@ -259,6 +259,9 @@ Permet de voir les pb à régler si rien ne s'affiche!!!
 
 forcer git push heroku master, notamment quand on a dû forcer git push origin master
 
+# Plusieurs environnements de production
+
+https://medium.com/dev-on-rails/environnement-de-staging-et-pipeline-de-production-sur-heroku-7fb98ce32ab1
 
 
 

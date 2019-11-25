@@ -65,6 +65,25 @@ ex:
 	    end
 	  end
 
+OU (avec messages)
+
+		def create
+	    @book = Book.new(book_params)
+
+	    respond_to do |format|
+	    if @book.save
+	      format.html do 
+	      	flash[:success] = "Book enregistré"
+	      	redirect_to ton_path
+	      end
+	        format.js do
+	      end 
+	    else
+				flash[:error] = " "
+				render ' '
+	    end
+	  end
+
 
 ## Étape 4: écrire le JavaScript qui va insérer l'info dans la page
 

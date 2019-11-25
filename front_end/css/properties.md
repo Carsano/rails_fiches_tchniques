@@ -28,3 +28,11 @@ display: none; == ne pas afficher
 a {
 	outline: none !important;
 }
+
+## transform: scale(1)
+
+A utiliser avec hover
+
+==> le hover suit la taille de l'image! 
+
+==> marche très bien avec la class: img-responsive bootstrap !!

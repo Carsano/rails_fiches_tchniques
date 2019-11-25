@@ -481,7 +481,7 @@ $ bundle install
 
 - aller voir dans le bucket créé si l'image chagée y est bien!!!
 
-# Test en local!! N'a pas marché pour moi....
+# Test en local!! N'a pas marché pour moi.... 
 
 - dans config/environments/production.rb, change la ligne
 

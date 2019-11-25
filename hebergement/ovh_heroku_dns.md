@@ -21,7 +21,7 @@ https://stackoverflow.com/questions/36292485/customize-url-with-heroku-and-ovh
 
 ==> rentrer le dns du site en www.tonsite.com/fr/...
 
-==> retourne un DNS target
+==> retourne un DNS target qu'il faudra donner à OVH (donc garder la fenêtre ouverte) 
 
 # Connecter OVH avec Heroku
 
@@ -95,4 +95,4 @@ https://stackoverflow.com/questions/36292485/customize-url-with-heroku-and-ovh
 ==> nom-app-prod => Settings => Domains => click sur le lien
 
 
-# Attention, pas de SSL, donc https://www.monsite.com ne marchera pas !!!!
+# Attention, pas de certicat SSL, donc https://www.monsite.com ne marchera pas !!!!
