@@ -128,7 +128,7 @@ options idem number
 
 options same as text_field_tag
 
-- select == dropdown selection box
+### select-tag == dropdown selection box
 
 		<%= select_tag(name, option_tags=nil, options)%> 
 
@@ -136,8 +136,14 @@ options multiple:true/false (multiple choices)
 				disabled:true/false
 				include_blank:true/false(option)
 				prompt: == Create a prompt option with blank value and the text asking user to select something.
+				options_for_select([les, choix], le_choix_enregistré)
 
-- submit
+ex:
+
+	<%= select_tag "profil_size", options_for_select(["Carré", "Petit rectangle", "Grand rectangle" ], resource.profil_size), class: "form-control" %>
+
+
+### submit_tag
 
 		<%= submit_tag(value='Save changes', oprions)%>
 

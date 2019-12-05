@@ -1,12 +1,17 @@
+https://github.com/bokmann/font-awesome-rails
+
+# Si pas de dossier fonts
+
 ##Installation
 
 ###Add this to your Gemfile:
 
 	gem "font-awesome-rails"
 
-###$ bundle install
+### $ bundle install
 
-##Usage
+
+## Usage
 
 In your application.css, include the css file:
 
@@ -14,4 +19,17 @@ In your application.css, include the css file:
 	 *= require font-awesome
 	 */
 
-##restart your webserver if it was previously running
+## Redémarrer le serveur!!!!!!!
+
+## Views
+
+ex:
+
+	<span style="font-size: 3em; color: Tomato;">
+	  <i class="fa fa-camera"></i>
+	</span>
+
+
+# Si dossier fonts
+
+==> cf méthodo front_end/fonts/icomoon.md

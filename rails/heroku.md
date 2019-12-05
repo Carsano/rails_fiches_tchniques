@@ -259,9 +259,51 @@ Permet de voir les pb à régler si rien ne s'affiche!!!
 
 forcer git push heroku master, notamment quand on a dû forcer git push origin master
 
-# Plusieurs environnements de production
+
+# Plusieurs environnements de production ou staging
 
 https://medium.com/dev-on-rails/environnement-de-staging-et-pipeline-de-production-sur-heroku-7fb98ce32ab1
+
+
+ex: j'ai une app-staging branché sur github master et une app-prod
+
+Je veux tester une nouvelle fonctionnalité et je ne veux pas la tester sur app-staging
+
+## création d'une nouvelle app dans la section staging de heroku => ex: app-test
+
+==> mettre les addons nécessaires
+
+==> +/- clés utiles
+
+==> branché cette nouvelle appli à la branch de test github
+
+## git et github
+
+==> pusher la branch test sur github
+
+## $ git remote add test-heroku <remote heroku name>
+
+==> création d'une nouvelle remote heroku
+
+## $ git remote --v
+
+==> vérification de l'ajout de la remote test
+
+## $ heroku login
+
+==> pour se connecté au compte heroku de l'appli
+
+## $ git push test-heroku branch_test_name:master
+
+==> on push sur la remote test-heroku la branch test en master
+
+## Si db et/ou seed
+
+### $ heroku run rails db:migrate -a app-test
+
+### $ heroku run rails db:seed -a app-test
+
+## $ heroku restart -a app-test
 
 
 

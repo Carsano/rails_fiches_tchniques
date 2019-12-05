@@ -1,0 +1,1 @@
+cf rails/gems/gem_font_awesome.md

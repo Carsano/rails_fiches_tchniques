@@ -29,3 +29,13 @@
 # $ rspec
 
 ==> command pour lancer les tests !!!!
+
+# Amélioration
+
+## Factory_bot
+
+==> cf factory_bot.md
+
+## Shoulda_matchers
+
+==> cf shoulda_matchers.md

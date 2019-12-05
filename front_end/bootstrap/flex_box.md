@@ -1,29 +1,70 @@
 https://mastery.games/p/flexbox-zombies
 
+## Dans .css, cibler l'élément qui contenient les éléments
+
+    element {
+    display: flex;
+    }
+
+## checker si changement dans le front
+
+
+## flex-direction
+
+==> Définir si les éléments doivent être disposés en horizontal ou vertical
+
+    - row: les éléments sont en lignes
+    
+    - row-reverse: les éléments sont en ligne, dans l'ordre inverse
+    
+    - column: les éléments sont mis en colonnes, de haut en bas
+    
+    - column-reverse: les éléments sont mis en place en colonnes, de bas en haut.
+
+
+==> dans css
+
+    element {
+    display: flex;
+    flex-direction: column;
+    ...
+    }
+
+
 ## justify-content
 
-==> aligne les items horizontalement
+==> disposition des éléments horizontalement (flex-direction: row;) ou verticalement (flex-direction: column;)
 
-    - start: Items align to the left side of the container.
+    - start: éléments disposés au début
 
-    - end: Items align to the right side of the container.
+    - end: éléments disposés à la fin
 
-    - center: Items align at the center of the container.
+    - center: éléments centrés
     
     - space-between: Items display with equal spacing between them.
     
     - space-around: Items display with equal spacing around them.
 
+==> dans le css
+
+    element {
+        display: flex;
+        justify-content: flex-start;
+        ...
+    }
+
 
 ## align-items
 
-==> aligns items vertically
+==> disposition des éléments sur l'axe vertical (row) et horizontal (column)
 
     - start: Items align to the top of the container.
     
     - end: Items align to the bottom of the container.
     
     - center: Items align at the vertical center of the container.
+
+    - stretch: étire les éléments sur toute la hauteur, MIS PAR DEFAUT
 
     - between
 
@@ -32,6 +73,50 @@ https://mastery.games/p/flexbox-zombies
     - baseline: Items display at the baseline of the container.
     
     - stretch: Items are stretched to fit the container.
+
+
+==> dans le css
+
+    element {
+      display: flex;
+      align-items: flex-start;
+      ...  
+    }
+
+.target:nth-of-type(x){
+}
+
+.target.male{
+  
+}
+
+# ATTENTION: quand flex-direction-column, align-items et justify content sont inversé!!!!
+
+justify-content == aligns items vertically
+
+align-items == aligne les items horizontalement
+
+
+## align-self
+
+==> sous-entend avoir cibler d'abord les éléments avec align-items
+
+==> permet de cibler certains éléments dans les éléments et de les positionner autrement
+
+==> même propriétés que align-items
+
+ex: 
+
+    element {
+      display: flex;
+      align-items: flex-start;
+      ...  
+    }
+
+    element_cible {
+      align-self: ...;
+    }
+
 
 ## align-content
 
