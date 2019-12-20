@@ -239,11 +239,50 @@ Pour les partials:
 	<%= form_for(resource, url: path, method: method)  do |f| %>
 	<% end %>
 
-## textarea
+### textarea
 
 	<%= f.text_area :moe, value:resource.moe, rows: 3, class: "form-control" %>
 
 
 ## form_with
 
-# Fonctionne directement avec JS et AJAX !
+# Va remplacer les form_tag et form_for 
+
+https://m.patrikonrails.com/rails-5-1s-form-with-vs-old-form-helpers-3a5f72a8c78a
+
+https://medium.com/@tinchorb/form-with-building-html-forms-in-rails-5-1-f30bd60ef52d
+
+https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-form_with
+
+==> Comme form_for et form_tag, form_with génère automatiquement les ids et class des forms
+
+	<%= form_with model: @user do |form| %>
+	  <%= form.text_field :name %>
+	  <%= form.text_field :email %>
+	<% end %>
+
+
+	<form action="/users" ...>
+	  <input type="text" name="user[name]" />
+	  <input id="email" class="email" type="text" name="user[email]" />  
+	</form>
+
+
+==> form_with avec un model
+
+	<%= form_with model: @user do |form| %>
+	  <%= form.text_field :email %>
+	  <%= form.submit %>
+	<% end %>
+
+
+# Attention: Fonctionne directement avec JS et AJAX !
+
+==> pour rester en html == mettre local: true
+
+	<%= form_with model: @user, local: true do |form| %>
+	  <%= form.text_field :name %>
+	  <%= form.text_field :email %>
+	<% end %>
+
+==> nécessite de créer des fichiers en .js.erb, comme en ajax!

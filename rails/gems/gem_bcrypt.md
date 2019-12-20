@@ -48,3 +48,5 @@ OU
 User.create(name:"", password:"")
 
 ==> faire un seed.rb qui créé l'admin
+
+User.create(name:'name', password:'pasword')

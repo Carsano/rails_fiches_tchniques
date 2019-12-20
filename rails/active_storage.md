@@ -39,6 +39,8 @@ $ rails g controller index ....
 
 ## $ rails db:migrate
 
+## +/- gem 'mini_magick' + bundle install
+
 
 
 ## has_one_attached
@@ -325,8 +327,8 @@ $ rails g controller avatars new create
 
 	<%= form_tag project_files_path(@project), multipart: true do |file| %>
 	  <%= file_field_tag :files, multiple: true %>
-	  													# permet de charger plusieurs files en une fois
-	  													# ou multiply si chargements en plusieurs fois
+			# permet de charger plusieurs files en une fois
+			# ou multiply si chargements en plusieurs fois
 	  <%= submit_tag "mettre à jour" %>
 	<% end %>
 

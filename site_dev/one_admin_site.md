@@ -48,11 +48,11 @@ Plus vite l'appli est banché en staging et prod, mieux c'est pour tester en liv
 
 ## Log-in 
 
-==> cf gem_bcrypt.md
+==> cf rails/gems/gem_bcrypt.md
 
 ## Sessions 
 
-==> admin_section_simple.md
+==> rails/admin_section_simple.md
 
 # Tests + Heroku
 

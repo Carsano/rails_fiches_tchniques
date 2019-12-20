@@ -153,19 +153,35 @@ Create pipeline
 
 ## En solo
 
+Prépa master
+
+### $ git push origin master
+
+Prépa branche staging
+
+### $ git branch staging
+
+### $ git push origin staging
+
+Pour chaque travail
+
+### $ git checkout staging
+
+### $ git pull origin staging
+
 ### $ git checkout -b work-branch
+
+==> git merge staging
 
 ==> effectuer les changements
 
 ==> $ git commit work_branch
 
-### $ git checkout master
+### git push origin work-branch
 
-### $ git pull origin master
+Github 
 
-### $ git merge work_branch + gestions conflits
-
-### git push origin master
+### Faire les pull request pour merge workbranch sur staging, puis staging sur master
 
 
 # $ heroku login 

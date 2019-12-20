@@ -75,7 +75,8 @@ array.each_with_index do |x, i| x, i end
 
 array.sort == alphabetical order
 array.sort_by {|x| x..} == trier par ... dans l'ordre
-array.sort_by.reverse_each {|x| x.id} == trier par ordre décroissant d'id
+array.sort_by.reverse_each == ordre id décroissant
+array.sort_by.reverse_each {|x| x.id} == trier par ordre décroissant de ...
 
 array.first == first elt of the array
 array.last

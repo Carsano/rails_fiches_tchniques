@@ -46,11 +46,13 @@ Si personne n'est connecté => session[:user_id] = nil.
 		end
 
 		def create
-	  # cherche s'il existe un utilisateur en base avec l’e-mail
-	  user = User.find_by(email: email_dans_ton_params)
+		  # cherche s'il existe un utilisateur en base avec l’e-mail
+		  user = User.find_by(email:params[:email])
+		  ou nom
+		  user = User.find_by(name:params[:name])
 
 		  # on vérifie si l'utilisateur existe bien ET si on arrive à l'authentifier (méthode bcrypt) avec le mot de passe 
-		  if user && user.authenticate(password_dans_ton_params)
+		  if user && user.authenticate(params[:password])
 		    session[:user_id] = user.id
 		    # redirige où tu veux, avec un flash ou pas
 
@@ -73,6 +75,7 @@ Dans sessions_controller
 
 	def destroy
 	  session.delete(:user_id)
+  	session[:user_id] = nil
 	end
 
 ### Routes.rb
@@ -110,10 +113,12 @@ Donc une fois la ligne rajoutée, il faut créer un fichier app/helpers/sessions
 
 	module SessionsHelper
 	   def current_user
-	    User.find_by(id: session[:user_id])
-	  end
+		   if session[:user_id]
+		     @current_user = User.find_by(id: session[:user_id])
+		   end
+		 end
 
-	   def log_in(user)
+	  def log_in(user)
 	    session[:user_id] = user.id
 	  end
 

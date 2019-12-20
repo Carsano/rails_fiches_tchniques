@@ -1,3 +1,6 @@
+https://mixandgo.com/learn/how-to-use-link_to-in-rails
+
+https://stackoverflow.com/questions/29435959/rails-4-data-toggle-link-to
 
 ## pour un lien texte 
 
@@ -29,3 +32,7 @@
 ## link_to avec un <span>
 
 	<%= link_to "<span>L</span>og-out".html_safe, ton_path, ta_class: 'class_name' %>
+
+## data-toggle
+
+https://stackoverflow.com/questions/35593612/link-to-with-embedded-ruby-in-the-data-toggle?rq=1

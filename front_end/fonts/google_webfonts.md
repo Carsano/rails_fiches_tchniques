@@ -1,5 +1,6 @@
 # ****** Webfonts google/asset pipeline rails ****
 
+https://fonts.google.com/
 https://google-webfonts-helper.herokuapp.com/fonts/
 
 # Dans le cas où la police ne passe en prod
